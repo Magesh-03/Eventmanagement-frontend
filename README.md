@@ -4,5 +4,24 @@ This template provides a minimal setup to get React working in Vite with HMR and
 
 Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# Event Management App Frontend
+
+This is the frontend for an Event Management App built with React. It provides a user-friendly interface for managing events, bookings, and user profiles.
+
+## Features
+
+- User authentication and authorization
+- Event listing and details
+- Booking management
+- User profile management
+- Admin dashboard
+
+## Technologies Used
+
+- React
+- Redux for state management
+- React Router for navigation
+- Axios for API calls
+- Material-UI for UI components
+
+
