@@ -27,7 +27,10 @@ const Navbar = () => {
         <GiHamburgerMenu />
       </div>
     </nav>
+   
   );
+
+  
 };
 
 export default Navbar;
