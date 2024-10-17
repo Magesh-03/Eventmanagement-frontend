@@ -12,9 +12,11 @@ function Signup() {
     const handleSubmit = (e) => {
         e.preventDefault()
         axios.post('http://localhost:4000/users/login',{ email, password})
-        .then(result =>{ console.log(result)
+        .then(result =>{
+          console.log(result)
+          if(result.data === "Success"){
          navigate('/home')
-
+          }
         })
         .catch(err=> console.log(err))
     }
