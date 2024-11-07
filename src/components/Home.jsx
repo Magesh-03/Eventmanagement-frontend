@@ -3,9 +3,9 @@ import React from 'react';
 import Navbar from './Navbar';
 import HeroSection from './HeroSection';
 import Footer from './Footer';
-import Contact from './Contact';
 import Services from './Services';
 import About from './About';
+import Contact from './Contact'
 
 function Home() {
   return (
@@ -13,7 +13,7 @@ function Home() {
       <Navbar />
       <HeroSection />
       <Services />
-      <Contact />
+      <Contact/>
       <About />
       <Footer />
     </>

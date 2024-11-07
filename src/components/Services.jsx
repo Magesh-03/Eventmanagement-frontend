@@ -6,6 +6,7 @@ const Services = () => {
       id:1,
       url:"anniversary.jpg",
       title:"Anniversary Planning",
+      
     },
     {
       id:2,
@@ -43,6 +44,7 @@ const Services = () => {
         return(
           <div className="item" key={element.id}>
             <h3>{element.title}</h3>
+            
             <img src={element.url} alt={element.title} />
           </div>
         );

@@ -1,100 +1,125 @@
-import React, { useState } from "react";
-import axios from "axios";
-import toast from "react-hot-toast";
+import React, { useState } from 'react';
+import axios from 'axios';
 
-const Contact = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
-  const [message, setMessage] = useState("");
+const EventBookingForm = () => {
+ 
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [eventDate, setEventDate] = useState('');
+  const [eventTime, setEventTime] = useState('');
+  const [eventName, setEventName] = useState('');
+  const [message, setMessage] = useState('');
 
-  const handleSendMessage = async (e) => {
+ 
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!name || !email || !eventDate || !eventTime || !eventName) {
+      setMessage('Please fill in all fields.');
+      return;
+    }
+
     try {
-      const res = await axios.post(
-        "https://eventmanagementz-backend.onrender.com/api/v1/message/send",
-        {
-          name,
-          email,
-          subject,
-          message,
-        },
-        {
-          withCredentials: true,
-          headers: { "Content-Type": "application/json" },
-        }
-      );
-      toast.success(res.data.message);
-      setName("");
-      setEmail("");
-      setMessage("");
-      setSubject("");
+      
+      const response = await axios.post('https://eventmanagementz-backend.onrender.com/api/book', {
+        name,
+        email,
+        eventDate,
+        eventTime,
+        eventName,
+      });
+
+      setMessage(`Booking successful for "${eventName}" on ${eventDate} at ${eventTime}.`);
+      
+      
+      setName('');
+      setEmail('');
+      setEventDate('');
+      setEventTime('');
+      setEventName('');
     } catch (error) {
-      const errorMessage = error.response?.data?.message || "Something went wrong. Please try again.";
-      toast.error(errorMessage);
+      
+      setMessage('Failed to create booking. Please try again later.');
     }
   };
-  
-      
-  
 
   return (
-    <>
-      <div className="contact container">
-        <div className="banner">
-          <div className="item">
-            <h4>Address</h4>
-            <p>Any where, Any City, 4521</p>
-          </div>
-          <div className="item">
-            <h4>Call Us</h4>
-            <p>Call Us: +92-321-1111111</p>
-          </div>
-          <div className="item">
-            <h4>Mail Us</h4>
-            <p>zenplaner@gmail.com</p>
-          </div>
+    <div className="form-container">
+      <h1>Book Your Event</h1>
+      <form onSubmit={handleSubmit}>
+        <div>
+          <label htmlFor="name">Full Name:</label>
+          <input
+            type="text"
+            id="name"
+            value={name}
+            onChange={(e) => setName(e.target.value)}
+            required
+          />
         </div>
-        <div className="banner">
-          <div className="item">
-            
-          </div>
-          <div className="item">
-            <form onSubmit={handleSendMessage}>
-              <h2>CONTACT</h2>
-              <div>
-                <input
-                  type="text"
-                  placeholder="Name"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                />
-                <input
-                  type="email"
-                  placeholder="E-mail"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-              </div>
-              <input
-                type="text"
-                placeholder="Subject"
-                value={subject}
-                onChange={(e) => setSubject(e.target.value)}
-              />
-              <textarea
-                rows={10}
-                placeholder="Message"
-                value={message}
-                onChange={(e) => setMessage(e.target.value)}
-              />
-              <button type="submit">Send</button>
-            </form>
-          </div>
+
+        <div>
+          <label htmlFor="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
         </div>
-      </div>
-    </>
+
+        <div>
+          <label htmlFor="eventDate">Event Date:</label>
+          <input
+            type="date"
+            id="eventDate"
+            value={eventDate}
+            onChange={(e) => setEventDate(e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="eventTime">Event Time:</label>
+          <input
+            type="time"
+            id="eventTime"
+            value={eventTime}
+            onChange={(e) => setEventTime(e.target.value)}
+            required
+          />
+        </div>
+
+        <div>
+          <label htmlFor="eventName">Event Type:</label>
+          <select
+            id="eventName"
+            value={eventName}
+            onChange={(e) => setEventName(e.target.value)}
+            required
+          >
+            <option value="">Select Event</option>
+            <option value="Birthday">Birthday</option>
+            <option value="Wedding">Wedding</option>
+            <option value="Anniversary">Anniversary</option>
+            <option value="Conference">Conference</option>
+            <option value="Party">Party</option>
+            <option value="Graduation">Graduation</option>
+            <option value="Meeting">Meeting</option>
+            <option value="Exhibition">Exhibition</option>
+            <option value="Seminar">Seminar</option>
+            <option value="Workshop">Workshop</option>
+          </select>
+        </div>
+
+        <button type="submit">Book Event</button>
+      </form>
+
+      {message && <p>{message}</p>}
+    </div>
   );
 };
 
-export default Contact;
+export default EventBookingForm;
+
