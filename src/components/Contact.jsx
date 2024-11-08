@@ -1,16 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-
+import "./Contact.css"
 const EventBookingForm = () => {
- 
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [eventDate, setEventDate] = useState('');
   const [eventTime, setEventTime] = useState('');
   const [eventName, setEventName] = useState('');
+  const [price, setPrice] = useState(0);
   const [message, setMessage] = useState('');
 
- 
+  
+  const prices = {
+    Birthday: 100,
+    Wedding: 500,
+    Anniversary: 300,
+    Conference: 400,
+    Party: 150,
+    Graduation: 200,
+    Meeting: 250,
+    Exhibition: 450,
+    Seminar: 350,
+    Workshop: 300,
+  };
+
+  
+  useEffect(() => {
+    setPrice(eventName ? prices[eventName] : 0);
+  }, [eventName]);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -20,17 +38,17 @@ const EventBookingForm = () => {
     }
 
     try {
-      
       const response = await axios.post('https://eventmanagementz-backend.onrender.com/api/book', {
+      
         name,
         email,
         eventDate,
         eventTime,
         eventName,
+        price, // Include the price in the request
       });
 
-      setMessage(`Booking successful for "${eventName}" on ${eventDate} at ${eventTime}.`);
-      
+      setMessage(`Booking successful for "${eventName}" on ${eventDate} at ${eventTime}. Total price: $${price}.`);
       
       setName('');
       setEmail('');
@@ -38,7 +56,6 @@ const EventBookingForm = () => {
       setEventTime('');
       setEventName('');
     } catch (error) {
-      
       setMessage('Failed to create booking. Please try again later.');
     }
   };
@@ -100,17 +117,14 @@ const EventBookingForm = () => {
             required
           >
             <option value="">Select Event</option>
-            <option value="Birthday">Birthday</option>
-            <option value="Wedding">Wedding</option>
-            <option value="Anniversary">Anniversary</option>
-            <option value="Conference">Conference</option>
-            <option value="Party">Party</option>
-            <option value="Graduation">Graduation</option>
-            <option value="Meeting">Meeting</option>
-            <option value="Exhibition">Exhibition</option>
-            <option value="Seminar">Seminar</option>
-            <option value="Workshop">Workshop</option>
+            {Object.keys(prices).map((event) => (
+              <option key={event} value={event}>{event}</option>
+            ))}
           </select>
+        </div>
+
+        <div>
+          <p>Price: ${price}</p>
         </div>
 
         <button type="submit">Book Event</button>
