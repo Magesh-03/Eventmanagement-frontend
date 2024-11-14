@@ -11,7 +11,7 @@ function Signup() {
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        axios.post('http://localhost:4000/users/register',{name , email, password})
+        axios.post('https://eventmanagementz-backend.onrender.com/users/register',{name , email, password})
         .then(result =>{ console.log(result)
          navigate('/login')
 

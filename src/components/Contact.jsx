@@ -39,7 +39,7 @@ const EventBookingForm = () => {
    
 
     try {
-      const response = await axios.post('http://localhost:4000/api/book', {
+      const response = await axios.post('https://eventmanagementz-backend.onrender.com/api/book', {
       
         name,
         email,

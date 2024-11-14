@@ -20,7 +20,7 @@ const Bookings = () => {
 
   const handleDelete = async (bookingId) => {
     try {
-      await axios.delete(`http://localhost:4000/api/bookings/${bookingId}`);
+      await axios.delete(`https://eventmanagementz-backend.onrender.com/api/bookings/${bookingId}`);
       setBookings(bookings.filter((booking) => booking._id !== bookingId));
       setMessage('Booking deleted successfully.');
     } catch (error) {
