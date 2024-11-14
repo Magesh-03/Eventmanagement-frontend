@@ -8,7 +8,7 @@ const Bookings = () => {
   useEffect(() => {
     const fetchBookings = async () => {
       try {
-        const response = await axios.get('http://localhost:4000/api/bookings');
+        const response = await axios.get('https://eventmanagementz-backend.onrender.com/api/bookings');
         setBookings(response.data);
       } catch (error) {
         setMessage('Failed to load bookings. Please try again later.');
