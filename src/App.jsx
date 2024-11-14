@@ -12,6 +12,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Signup from './components/Signup';
 import Login from './components/Login'
 import Home from './components/Home';
+import Contact from './components/Contact';
+import Bookings from './components/Bookings';
+import Bookpage from './components/Bookpage';
+import Cart from './components/Cart';
+
 function App() {
   return (<BrowserRouter>
 
@@ -19,6 +24,9 @@ function App() {
     <Route path='/' element={<Signup/>}></Route>
      <Route path='/login' element={<Login/>}></Route>
      <Route path='/home' element={<Home/>}></Route>
+     <Route path='/bookpage' element={<Bookpage/>}></Route>
+     <Route path='/cart' element={<Cart/>}></Route>
+  
     </Routes>
     </BrowserRouter>
      

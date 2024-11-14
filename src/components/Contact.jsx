@@ -36,16 +36,17 @@ const EventBookingForm = () => {
       setMessage('Please fill in all fields.');
       return;
     }
+   
 
     try {
-      const response = await axios.post('https://eventmanagementz-backend.onrender.com/api/book', {
+      const response = await axios.post('http://localhost:4000/api/book', {
       
         name,
         email,
         eventDate,
         eventTime,
         eventName,
-        price, // Include the price in the request
+        price,
       });
 
       setMessage(`Booking successful for "${eventName}" on ${eventDate} at ${eventTime}. Total price: $${price}.`);
@@ -127,11 +128,15 @@ const EventBookingForm = () => {
           <p>Price: ${price}</p>
         </div>
 
+        
         <button type="submit">Book Event</button>
+        
       </form>
-
+      
+     
       {message && <p>{message}</p>}
     </div>
+   
   );
 };
 
